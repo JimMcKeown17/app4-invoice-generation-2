@@ -24,6 +24,20 @@ for filepath in filepaths:
     pdf.cell(w=50, h=8, txt=f"Date: {date}", ln=2)
 
     df = pd.read_excel(filepath, sheet_name="Sheet 1")
+
+    #Adding headers to table
+
+    columns_list = list(df.columns)
+    columns = [header.replace("_"," ").title() for header in columns_list]
+    pdf.set_font(family="Times", size=10, style="B")
+    pdf.set_text_color(80, 80, 80)
+    pdf.cell(w=30, h=8, txt=columns[0], border=1, align="C")
+    pdf.cell(w=70, h=8, txt=columns[1], border=1, align="C")
+    pdf.cell(w=30, h=8, txt=columns[2], border=1, align="C")
+    pdf.cell(w=30, h=8, txt=columns[3], border=1, align="C")
+    pdf.cell(w=30, h=8, txt=columns[4], border=1, align="C", ln=1)
+
+    #Adding rows to table
     for index, row in df.iterrows():
         pdf.set_font(family="Times", size=10)
         pdf.set_text_color(80,80,80)
